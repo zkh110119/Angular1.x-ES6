@@ -13,7 +13,8 @@ require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c=
 }(this, (function (exports, ng_from_import, core) { 'use strict';
 
     /** @publicapi @module ng1 */ /** */
-    /** @hidden */ var ng_from_global = angular;
+    /** @hidden */ 
+    ng1ViewsBuilder.$inject = ["state"];var ng_from_global = angular;
     /** @hidden */ var ng = ng_from_import && ng_from_import.module ? ng_from_import : ng_from_global;
 
     /** @publicapi @module ng1 */ /** */
@@ -805,7 +806,7 @@ require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c=
         // https://github.com/angular-ui/ui-router/issues/3678
         if (!Object.prototype.hasOwnProperty.call($injector, 'strictDi')) {
             try {
-                $injector.invoke(function (checkStrictDi) { });
+                $injector.invoke(["checkStrictDi", function (checkStrictDi) { }]);
             }
             catch (error) {
                 $injector.strictDi = !!/strict mode/.exec(error && error.toString());
@@ -2020,7 +2021,6 @@ var App = /*#__PURE__*/function () {
       this.app.config(['$urlRouterProvider', function ($urlRouterProvider) {
         $urlRouterProvider.otherwise('/welcome');
       }]);
-      return this;
     }
   }, {
     key: "controller",
@@ -2028,7 +2028,6 @@ var App = /*#__PURE__*/function () {
       this.app.controller('appController', ['$scope', function ($scope) {
         $scope.parent_name = "\u6211\u662F\u9996\u9875\uFF01";
       }]);
-      return this;
     }
   }]);
   return App;
@@ -2062,18 +2061,12 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-require("@babel/polyfill");
-
-var _angular = _interopRequireDefault(require("angular"));
-
-var _angularjs = _interopRequireDefault(require("@uirouter/angularjs"));
-
 var _welcome = _interopRequireDefault(require("./welcome.html"));
 
 var Welcome = /*#__PURE__*/function () {
   function Welcome() {
     (0, _classCallCheck2["default"])(this, Welcome);
-    this.welcome = _angular["default"].module('mainApp.welcome', [_angularjs["default"], _welcome["default"]]);
+    this.welcome = angular.module('mainApp.welcome', [_welcome["default"]]);
     this.config();
     this.controller();
   }
@@ -2089,7 +2082,6 @@ var Welcome = /*#__PURE__*/function () {
           controllerAs: 'welcome'
         });
       }]);
-      return this;
     }
   }, {
     key: "controller",
@@ -2097,7 +2089,6 @@ var Welcome = /*#__PURE__*/function () {
       this.welcome.controller('welcomeController', [function () {
         this.name = '我是欢迎页面';
       }]);
-      return this;
     }
   }]);
   return Welcome;
@@ -2107,7 +2098,7 @@ new Welcome();
 var _default = 'mainApp.welcome';
 exports["default"] = _default;
 
-},{"./welcome.html":3,"@babel/polyfill":5,"@babel/runtime/helpers/classCallCheck":7,"@babel/runtime/helpers/createClass":8,"@babel/runtime/helpers/interopRequireDefault":9,"@uirouter/angularjs":"@uirouter/angularjs","angular":"angular"}],5:[function(require,module,exports){
+},{"./welcome.html":3,"@babel/runtime/helpers/classCallCheck":7,"@babel/runtime/helpers/createClass":8,"@babel/runtime/helpers/interopRequireDefault":9}],5:[function(require,module,exports){
 "use strict";
 
 require("./noConflict");

@@ -10,7 +10,8 @@ const {src, dest, series} = require('gulp'),
     rename = require('gulp-rename'),
     rm = require('rimraf'),
     path = require('path'),
-    replace = require('gulp-replace');
+    replace = require('gulp-replace'),
+    ngAnnotate = require('gulp-ng-annotate');
 
 function rimraf(cb) {
     rm(path.join(__dirname, 'dist'), function (err) {
@@ -35,7 +36,7 @@ function browser() {
             prefix: 'ui/',
             requireAngular: false
         }], babelify]
-    }).bundle().pipe(source('bundle.js')).pipe(buffer())/*.pipe(uglify()).pipe(rename({extname: '.min.js'}))*/.pipe(dest('./dist/app'));
+    }).bundle().pipe(source('bundle.js')).pipe(buffer()).pipe(ngAnnotate({add:true}))/*.pipe(uglify()).pipe(rename({extname: '.min.js'}))*/.pipe(dest('./dist/app'));
 }
 
 function css() {
@@ -52,7 +53,7 @@ function removeCss(cb) {
 }
 
 function moveHtml() {
-    return src('./app/index.html').pipe(replace('${JScript}', 'bundle.min.js')).pipe(dest('./dist/app'));
+    return src('./app/index.html').pipe(replace('${JScript}', 'bundle.js')).pipe(dest('./dist/app'));
 }
 
 module.exports.build = series(rimraf, moveHtml);

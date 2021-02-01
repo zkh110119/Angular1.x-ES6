@@ -18,16 +18,12 @@ class App {
         this.app.config(['$urlRouterProvider', function ($urlRouterProvider) {
             $urlRouterProvider.otherwise('/welcome')
         }]);
-
-        return this;
     }
 
     controller() {
         this.app.controller('appController', ['$scope', function ($scope) {
             $scope.parent_name = `我是首页！`;
         }]);
-
-        return this;
     }
 }
 
